@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import matplotlib.patches as patches
 import random
+from PIL import Image
+import numpy as np
+import math
 
 def extract_donnees(): #ok
     
@@ -17,39 +20,64 @@ def extract_donnees(): #ok
 		
 	return data
 
+def chgmt_de_base(img, rotation):
+	rotation = rotation*np.pi/360
+	xmin = img[1] - (512/2)
+	ymin = img[3] - (512/2)
+	xmax = img[2] - (512/2)
+	ymax = img[4] - (512/2)
+
+	#p1, p2, p3, p4 les 4 points
+	p1 = [xmax, ymax]
+	p2 = [xmax, ymin]
+	p3 = [xmin, ymin]
+	p4 = [xmin, ymax]
+
+	rec = [p1,p2,p3,p4]
+	rec_prime = rec
+
+	for i in range(len(rec)):
+		#x' = xcos() + ysin()
+		#y' = -xsin() + ycos()
+		rec_prime[i][0] = math.ceil(rec[i][0]*np.cos(rotation) + rec[i][1]*np.sin(rotation))
+		rec_prime[i][1] = math.ceil(-rec[i][0]*np.sin(rotation) + rec[i][1]*np.cos(rotation))
+
+	img[1] = (rec_prime[2][0] + (512/2)) 
+	img[2] = (rec_prime[0][0] + (512/2)) 
+	img[3] = (rec_prime[2][1] + (512/2)) 
+	img[4] = (rec_prime[0][1] + (512/2)) 
+	
+	return img
+
 data = extract_donnees()
 
-'''
 img = data[random.randint(0,100)]
-plt.imshow(mpimg.imread('../dataset_massalia/images/train_images/'+img[0]))
+
+
 plt.plot([img[1],img[1],img[2],img[2],img[1]],[img[3],img[4],img[4],img[3],img[3]],'r')
-plt.show()
-'''
+image = Image.open('../dataset_massalia/images/train_images/'+img[0])
+area = np.zeros([512,512])
 
-import tensorflow as tf
-from tensorflow.keras import layers
-
-def data_augmentation(image, rotation):
-	return tf.keras.Sequential([
-  layers.RandomFlip("horizontal_and_vertical"),
-  layers.RandomRotation(0.2),
-])
-
-
-
-
-#plt.figure(figsize=(10, 10))
-img = data[random.randint(0,100)]
-image = mpimg.imread('../dataset_massalia/images/train_images/'+img[0])
 plt.imshow(image)
-plt.plot([img[1],img[1],img[2],img[2],img[1]],[img[3],img[4],img[4],img[3],img[3]],'r')
-plt.show()
-for i in range(9):
-	
-	rotation = random.randint(0,360)
-	augmented_image = data_augmentation(image, rotation)
-	#ax = plt.subplot(3, 3, i + 1)
-	plt.imshow(augmented_image[0])
-	plt.axis("off")
+plt.plot([256,256],[256,256],'rD')
+img = chgmt_de_base(img,90)
+plt.plot([img[1],img[1],img[2],img[2],img[1]],[img[3],img[4],img[4],img[3],img[3]],'b')
+img = chgmt_de_base(img,90)
+plt.plot([img[1],img[1],img[2],img[2],img[1]],[img[3],img[4],img[4],img[3],img[3]],'g')
+img = chgmt_de_base(img,90)
+plt.plot([img[1],img[1],img[2],img[2],img[1]],[img[3],img[4],img[4],img[3],img[3]],'y')
 
+plt.show()
+
+def test():
+	plt.figure(figsize=(10, 10))
+	for i in range(9):
+		image = image.rotate(90)
+		ax = plt.subplot(3, 3, i + 1)
+		plt.imshow(image)
+		img = chgmt_de_base(img,90)
+		plt.plot([img[1],img[1],img[2],img[2],img[1]],[img[3],img[4],img[4],img[3],img[3]],'r')
+		plt.axis("off")
 	plt.show()
+
+test()
