@@ -51,23 +51,22 @@ def chgmt_de_base(img, rotation):
 
 data = extract_donnees()
 
-img = data[random.randint(0,100)]
 
 
-plt.plot([img[1],img[1],img[2],img[2],img[1]],[img[3],img[4],img[4],img[3],img[3]],'r')
-image = Image.open('../dataset_massalia/images/train_images/'+img[0])
-area = np.zeros([512,512])
+def test_bis():
+	plt.figure(figsize=(10, 10))
+	for i in range(9):
+		img = data[random.randint(0,100)]
+		image = Image.open('../dataset_massalia/images/train_images/'+img[0])
+		
+		ax = plt.subplot(3, 3, i + 1)
+		plt.imshow(image)
+		
+		plt.plot([img[1],img[1],img[2],img[2],img[1]],[img[3],img[4],img[4],img[3],img[3]],'r')
+		plt.axis("off")
+	plt.show()
 
-plt.imshow(image)
-plt.plot([256,256],[256,256],'rD')
-img = chgmt_de_base(img,90)
-plt.plot([img[1],img[1],img[2],img[2],img[1]],[img[3],img[4],img[4],img[3],img[3]],'b')
-img = chgmt_de_base(img,90)
-plt.plot([img[1],img[1],img[2],img[2],img[1]],[img[3],img[4],img[4],img[3],img[3]],'g')
-img = chgmt_de_base(img,90)
-plt.plot([img[1],img[1],img[2],img[2],img[1]],[img[3],img[4],img[4],img[3],img[3]],'y')
 
-plt.show()
 
 def test():
 	plt.figure(figsize=(10, 10))
@@ -80,4 +79,12 @@ def test():
 		plt.axis("off")
 	plt.show()
 
-test()
+
+img = data[random.randint(0,100)]
+image = Image.open('../dataset_massalia/images/train_images/'+img[0])
+plt.imshow(image)
+imm = np.array(image)
+print(type(imm))
+plt.imshow(imm)
+plt.plot()
+plt.show()
