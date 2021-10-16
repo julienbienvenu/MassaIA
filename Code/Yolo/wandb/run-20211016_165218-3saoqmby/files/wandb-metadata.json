@@ -1,0 +1,33 @@
+{
+    "os": "Linux-5.11.0-34-generic-x86_64-with-glibc2.29",
+    "python": "3.8.10",
+    "heartbeatAt": "2021-10-16T14:52:20.964802",
+    "startedAt": "2021-10-16T14:52:18.115006",
+    "docker": null,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [
+        "--img",
+        "512",
+        "--batch",
+        "16",
+        "--epochs",
+        "3",
+        "--data",
+        "data/coco128.yaml",
+        "--weights",
+        "yolov5x.pt"
+    ],
+    "state": "running",
+    "program": "train.py",
+    "codePath": "Code/Yolo/train.py",
+    "git": {
+        "remote": "https://github.com/julienbienvenu/MassaIA.git",
+        "commit": "e49febeea1395f4d4674e5af155f24c6b962a833"
+    },
+    "email": "=",
+    "root": "/home/julien/Documents/MassaIA",
+    "host": "julien",
+    "username": "julien",
+    "executable": "/usr/bin/python3"
+}
