@@ -1,6 +1,6 @@
 Execution du programme :
 se placer dans le dossier Yolo 
-python3 train.py --img 512 --batch 16 --epochs 3 --data data/coco128.yaml --weights yolov5s.pt
+python3 train.py --img 512 --batch 16 --epochs 3 --data data/coco128.yaml --weights yolov5x.pt
 
 Voir pour API depuis le site
 Choisir un meilleur modèle

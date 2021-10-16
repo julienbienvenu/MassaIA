@@ -1,0 +1,53 @@
+2021-10-16 16:28:23,411 INFO    MainThread:21444 [internal.py:wandb_internal():86] W&B internal server running at pid: 21444, started at: 2021-10-16 16:28:23.411158
+2021-10-16 16:28:23,437 DEBUG   HandlerThread:21444 [handler.py:handle_request():126] handle_request: check_version
+2021-10-16 16:28:23,437 INFO    WriterThread:21444 [datastore.py:open_for_write():77] open: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/run-3a2alubx.wandb
+2021-10-16 16:28:23,439 DEBUG   SenderThread:21444 [sender.py:send():185] send: header
+2021-10-16 16:28:23,439 DEBUG   SenderThread:21444 [sender.py:send_request():199] send_request: check_version
+2021-10-16 16:28:23,569 DEBUG   SenderThread:21444 [sender.py:send():185] send: run
+2021-10-16 16:28:23,578 INFO    SenderThread:21444 [sender.py:_maybe_setup_resume():427] checking resume status for None/YOLOv5/3a2alubx
+2021-10-16 16:28:24,060 INFO    SenderThread:21444 [dir_watcher.py:__init__():169] watching files in: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files
+2021-10-16 16:28:24,060 INFO    SenderThread:21444 [sender.py:_start_run_threads():746] run started: 3a2alubx with start time 1634394502
+2021-10-16 16:28:24,061 DEBUG   SenderThread:21444 [sender.py:send():185] send: summary
+2021-10-16 16:28:24,061 INFO    SenderThread:21444 [sender.py:_save_file():879] saving file wandb-summary.json with policy end
+2021-10-16 16:28:24,061 DEBUG   HandlerThread:21444 [handler.py:handle_request():126] handle_request: run_start
+2021-10-16 16:28:25,021 DEBUG   HandlerThread:21444 [meta.py:__init__():40] meta init
+2021-10-16 16:28:25,021 DEBUG   HandlerThread:21444 [meta.py:__init__():54] meta init done
+2021-10-16 16:28:25,021 DEBUG   HandlerThread:21444 [meta.py:probe():211] probe
+2021-10-16 16:28:25,023 DEBUG   HandlerThread:21444 [meta.py:_setup_git():201] setup git
+2021-10-16 16:28:25,041 DEBUG   HandlerThread:21444 [meta.py:_setup_git():208] setup git done
+2021-10-16 16:28:25,041 DEBUG   HandlerThread:21444 [meta.py:_save_pip():58] save pip
+2021-10-16 16:28:25,042 DEBUG   HandlerThread:21444 [meta.py:_save_pip():72] save pip done
+2021-10-16 16:28:25,042 DEBUG   HandlerThread:21444 [meta.py:probe():249] probe done
+2021-10-16 16:28:25,047 DEBUG   SenderThread:21444 [sender.py:send():185] send: files
+2021-10-16 16:28:25,048 INFO    SenderThread:21444 [sender.py:_save_file():879] saving file wandb-metadata.json with policy now
+2021-10-16 16:28:25,052 DEBUG   HandlerThread:21444 [handler.py:handle_request():126] handle_request: stop_status
+2021-10-16 16:28:25,052 DEBUG   SenderThread:21444 [sender.py:send_request():199] send_request: stop_status
+2021-10-16 16:28:25,062 INFO    Thread-8  :21444 [dir_watcher.py:_on_file_created():217] file/dir created: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/output.log
+2021-10-16 16:28:25,062 INFO    Thread-8  :21444 [dir_watcher.py:_on_file_created():217] file/dir created: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/requirements.txt
+2021-10-16 16:28:25,062 INFO    Thread-8  :21444 [dir_watcher.py:_on_file_created():217] file/dir created: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/wandb-metadata.json
+2021-10-16 16:28:25,063 INFO    Thread-8  :21444 [dir_watcher.py:_on_file_created():217] file/dir created: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/wandb-summary.json
+2021-10-16 16:28:25,285 DEBUG   SenderThread:21444 [sender.py:send():185] send: config
+2021-10-16 16:28:25,694 INFO    Thread-11 :21444 [upload_job.py:push():137] Uploaded file /tmp/tmp2338f00cwandb/17m0776z-wandb-metadata.json
+2021-10-16 16:28:28,061 INFO    Thread-8  :21444 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/output.log
+2021-10-16 16:28:29,062 INFO    Thread-8  :21444 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/output.log
+2021-10-16 16:28:30,062 INFO    Thread-8  :21444 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/output.log
+2021-10-16 16:28:34,063 INFO    Thread-8  :21444 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/output.log
+2021-10-16 16:28:40,476 WARNING MainThread:21444 [internal.py:is_dead():364] Internal process exiting, parent pid 21417 disappeared
+2021-10-16 16:28:40,476 ERROR   MainThread:21444 [internal.py:wandb_internal():141] Internal process shutdown.
+2021-10-16 16:28:41,085 INFO    WriterThread:21444 [datastore.py:close():281] close: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/run-3a2alubx.wandb
+2021-10-16 16:28:41,294 INFO    SenderThread:21444 [sender.py:finish():986] shutting down sender
+2021-10-16 16:28:41,294 INFO    SenderThread:21444 [dir_watcher.py:finish():283] shutting down directory watcher
+2021-10-16 16:28:41,299 INFO    HandlerThread:21444 [handler.py:finish():683] shutting down handler
+2021-10-16 16:28:42,069 INFO    SenderThread:21444 [dir_watcher.py:finish():313] scan: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files
+2021-10-16 16:28:42,069 INFO    SenderThread:21444 [dir_watcher.py:finish():327] scan save: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/wandb-summary.json wandb-summary.json
+2021-10-16 16:28:42,069 INFO    SenderThread:21444 [dir_watcher.py:finish():327] scan save: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/wandb-metadata.json wandb-metadata.json
+2021-10-16 16:28:42,069 INFO    SenderThread:21444 [dir_watcher.py:finish():327] scan save: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/output.log output.log
+2021-10-16 16:28:42,072 INFO    SenderThread:21444 [dir_watcher.py:finish():327] scan save: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/config.yaml config.yaml
+2021-10-16 16:28:42,075 INFO    SenderThread:21444 [dir_watcher.py:finish():327] scan save: /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/requirements.txt requirements.txt
+2021-10-16 16:28:42,075 INFO    SenderThread:21444 [file_pusher.py:finish():177] shutting down file pusher
+2021-10-16 16:28:42,075 INFO    SenderThread:21444 [file_pusher.py:join():182] waiting for file pusher
+2021-10-16 16:28:42,796 INFO    Thread-14 :21444 [upload_job.py:push():137] Uploaded file /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/config.yaml
+2021-10-16 16:28:42,798 INFO    Thread-15 :21444 [upload_job.py:push():137] Uploaded file /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/requirements.txt
+2021-10-16 16:28:42,799 INFO    Thread-13 :21444 [upload_job.py:push():137] Uploaded file /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/output.log
+2021-10-16 16:28:42,799 INFO    Thread-12 :21444 [upload_job.py:push():137] Uploaded file /home/julien/Documents/MassaIA/Code/Yolo/wandb/run-20211016_162822-3a2alubx/files/wandb-summary.json
+2021-10-16 16:28:43,315 INFO    MainThread:21444 [internal.py:handle_exit():76] Internal process exited
