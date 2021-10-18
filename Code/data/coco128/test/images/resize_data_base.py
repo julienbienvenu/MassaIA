@@ -13,17 +13,14 @@ def extract_donnees():
 		
 	return data
 
-data = extract_donnees()
-for i in range(len(data)):
-    dx = (data[i][2] - data[i][1]) / 2
-    dy = (data[i][4] - data[i][3]) / 2
-    x = data[i][1] + dx
-    y = data[i][3] + dy
-    with open('../labels/' + data[i][0]+'.txt','w') as f:
-        f.write('0\t')
-        f.write(str(x)+'\t')
-        f.write(str(y)+'\t')
-        f.write(str(dx)+'\t')
-        f.write(str(dy)+'\t')
+      
+def save_list_name():
+	data = extract_donnees()
+	with open('../name_images.csv','w') as f:
+		for i in range(len(data)):
+		    name = data[i][0]
+		    f.write(str(name)+'\n')
 
-        f.close()
+	f.close()
+	
+save_list_name()
