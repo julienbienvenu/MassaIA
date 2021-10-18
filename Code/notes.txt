@@ -5,3 +5,11 @@ python3 train.py --img 512 --batch 16 --epochs 3 --data data/coco128.yaml --weig
 Voir pour API depuis le site
 Choisir un meilleur modèle
 Augmentation de la base de données
+
+
+https://github.com/ultralytics/yolov5#pretrained-checkpoints
+https://github.com/ultralytics/yolov5/issues/36
+
+To use my 'custom' model : 
+model = torch.hub.load('ultralytics/yolov5', 'custom', path='path/to/best.pt')  # default
+model = torch.hub.load('path/to/yolov5', 'custom', path='path/to/best.pt', source='local')  # local repo

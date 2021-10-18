@@ -1,0 +1,48 @@
+Overriding model.yaml nc=80 with nc=1
+Overriding model.yaml anchors with anchors=3
+                 from  n    params  module                                  arguments
+  0                -1  1      8800  models.common.Conv                      [3, 80, 6, 2, 2]
+  1                -1  1    115520  models.common.Conv                      [80, 160, 3, 2]
+  2                -1  4    309120  models.common.C3                        [160, 160, 4]
+  3                -1  1    461440  models.common.Conv                      [160, 320, 3, 2]
+  4                -1  8   2259200  models.common.C3                        [320, 320, 8]
+  5                -1  1   1844480  models.common.Conv                      [320, 640, 3, 2]
+  6                -1 12  13125120  models.common.C3                        [640, 640, 12]
+  7                -1  1   7375360  models.common.Conv                      [640, 1280, 3, 2]
+  8                -1  4  19676160  models.common.C3                        [1280, 1280, 4]
+  9                -1  1   4099840  models.common.SPPF                      [1280, 1280, 5]
+ 10                -1  1    820480  models.common.Conv                      [1280, 640, 1, 1]
+ 11                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']
+ 12           [-1, 6]  1         0  models.common.Concat                    [1]
+ 13                -1  4   5332480  models.common.C3                        [1280, 640, 4, False]
+ 14                -1  1    205440  models.common.Conv                      [640, 320, 1, 1]
+ 15                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']
+ 16           [-1, 4]  1         0  models.common.Concat                    [1]
+ 17                -1  4   1335040  models.common.C3                        [640, 320, 4, False]
+ 18                -1  1    922240  models.common.Conv                      [320, 320, 3, 2]
+ 19          [-1, 14]  1         0  models.common.Concat                    [1]
+ 20                -1  4   4922880  models.common.C3                        [640, 640, 4, False]
+ 21                -1  1   3687680  models.common.Conv                      [640, 640, 3, 2]
+ 22          [-1, 10]  1         0  models.common.Concat                    [1]
+ 23                -1  4  19676160  models.common.C3                        [1280, 1280, 4, False]
+ 24      [17, 20, 23]  1     40374  models.yolo.Detect                      [1, [[0, 1, 2, 3, 4, 5], [0, 1, 2, 3, 4, 5], [0, 1, 2, 3, 4, 5]], [320, 640, 1280]]
+Model Summary: 567 layers, 86217814 parameters, 86217814 gradients, 204.2 GFLOPs
+Transferred 738/745 items from yolov5x.pt
+Scaled weight_decay = 0.000515625
+[34m[1moptimizer:[39m[22m SGD with parameter groups 123 weight, 126 weight (no decay), 126 bias
+[34m[1mtrain: [39m[22mScanning '../data/coco128/labels.cache' images and labels... 720 found, 0 missing, 0 empty, 0 corrupted: 100%|███████████████████████████████████████████████████████████| 720/720 [00:00<?, ?it/s]
+[34m[1mval: [39m[22mScanning '../data/coco128/labels.cache' images and labels... 720 found, 0 missing, 0 empty, 0 corrupted: 100%|█████████████████████████████████████████████████████████████| 720/720 [00:00<?, ?it/s]
+[34m[1mautoanchor: [39m[22mEvolving anchors with Genetic Algorithm: fitness = 0.8508:  29%|█████████████████████████▋                                                               | 288/1000 [00:00<00:00, 2870.83it/s]
+[34m[1mautoanchor: [39m[22mAnalyzing anchors... anchors/target = 0.94, Best Possible Recall (BPR) = 0.3111. Attempting to improve anchors, please wait...
+[34m[1mautoanchor: [39m[22mRunning kmeans for 9 anchors on 720 points...
+[34m[1mautoanchor: [39m[22mthr=0.25: 1.0000 best possible recall, 8.79 anchors past thr
+[34m[1mautoanchor: [39m[22mn=9, img_size=512, metric_all=0.560/0.845-mean/best, past_thr=0.568-mean: 11,11,  13,17,  17,13,  14,23,  26,14,  22,20,  20,31,  39,20,  33,45
+[34m[1mautoanchor: [39m[22mthr=0.25: 1.0000 best possible recall, 8.88 anchors past thr
+[34m[1mautoanchor: [39m[22mn=9, img_size=512, metric_all=0.584/0.853-mean/best, past_thr=0.589-mean: 13,12,  11,16,  17,15,  13,22,  25,13,  21,19,  17,27,  36,20,  28,37
+Reversing anchor order
+[34m[1mautoanchor: [39m[22mEvolving anchors with Genetic Algorithm: fitness = 0.8529: 100%|████████████████████████████████████████████████████████████████████████████████████████| 1000/1000 [00:00<00:00, 3059.54it/s]
+Image sizes 512 train, 512 val
+Using 1 dataloader workers
+Logging results to [1mruns/evolve/exp
+Starting training for 3 epochs...
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
