@@ -6,3 +6,4 @@ Yolo/__pycache__
 Yolo/utils/
 Yolo/wandb
 Yolo/yolov5x.pt
+Yolo/runs
