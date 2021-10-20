@@ -70,14 +70,14 @@ def bb_intersection_over_union(boxA, boxB):
 	return abs(iou)
 
 
-def test_sample():
+def test_sample(name_folder):
 
 	predic_ma = []
 	L = []
 	for i in range(len(imgs)):
 	
 		print(i, len(imgs))
-		path_model = 'Yolo/runs/train/'+'test_henri'+'/weights/best.pt'
+		path_model = 'Yolo/runs/train/'+str(name_folder)+'/weights/best.pt'
 		path_to_yolo = 'Yolo/'
 		
 		model = torch.hub.load(path_to_yolo, 'custom', path=path_model, source='local')  # local repo
@@ -118,7 +118,7 @@ def test_iou():
 	# loop over the example detections*
 	cpt = 0
 	for detection in examples:
-		cpt=cpt+1
+		
 		# load the image
 		image = cv2.imread(detection.image_path)
 		# draw the ground-truth bounding box along with the predicted
@@ -129,13 +129,23 @@ def test_iou():
 		iou = bb_intersection_over_union(detection.gt, detection.pred)
 		iou_list.append(iou)
 		cv2.putText(image, "IoU: {:.4f}".format(iou), (10, 30),
+			cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+		cv2.putText(image, "REAL".format(iou), (10, 60),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+		cv2.putText(image, "PRED".format(iou), (10, 90),
+			cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
 		#print("{}: {:.4f}".format(detection.image_path, iou))
 		# show the output image
 		#cv2.imshow("Image", image)
-		#cv2.imwrite("runs/images/"+str(cpt)+".jpg", image)
+		if iou != 0:
+			cv2.imwrite("runs/images/detection/"+str(data[cpt])+".jpg", image)
+		else:
+			if detection.pred == [0,0,0,0]:
+				cv2.imwrite("runs/images/no_detection/"+str(data[cpt])+".jpg", image)
+			else:
+				cv2.imwrite("runs/images/false_detection/"+str(data[cpt])+".jpg", image)
 		#cv2.waitKey(0)
-
+		cpt=cpt+1
 	#print(sum(iou_list)/len(iou_list)) iou average
 	return (iou_list)
 
@@ -156,18 +166,27 @@ def indicators(iou_list):
 			else:
 				false_detection+=1 
 
+	#Graph : Apple pie of IoU types
 	fig = plt.figure()
 	pie = [detected/len(iou_list),not_detected/len(iou_list),false_detection/len(iou_list)]
-	plt.pie(pie, labels=['Detected','Not detected', 'False detection'], autopct = lambda pie: str(round(pie, 2)) + '%')
+	plt.pie(pie, labels=['Detection','No detection', 'False detection'], autopct = lambda pie: str(round(pie, 2)) + '%')
 	plt.title('Repartition of all iou')
 	plt.savefig("runs/analysis/pie_detected.png")
 	
+	#Graph : Historigram of positive IoU
 	fig = plt.figure()
 	plt.hist(porcentage)
 	plt.title('Repartition of detected iou')
-	plt.savefig("runs/analysis/detected_hist.png")
-	#plt.plot([i for i in range(len(porcentage))],porcentage)
-	
+	plt.savefig("runs/analysis/detected_hist.png")	
 
-iou_list= test_iou()
-indicators(iou_list)
+val = input('Do you want to try sample ? : (y/n)')
+if val=='y':
+	print('Enter try sample IoU')
+	name_folder = input('Name folder : ')
+	test_sample(name_folder)
+	iou_list= test_iou()
+	indicators(iou_list)
+else:
+	print('Enter indicators IoU')
+	iou_list= test_iou()
+	indicators(iou_list)
