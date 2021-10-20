@@ -2,6 +2,7 @@ import torch
 import csv
 import cv2
 import pandas as pd
+import matplotlib.pyplot as plt
 from PIL import Image
 from collections import namedtuple
 
@@ -110,7 +111,7 @@ def test_iou():
 	Detection = namedtuple("Detection", ["image_path", "gt", "pred"])
 	examples = []
 	predict = [] #[xmin, ymin, xmax, ymax]
-
+	
 	for i in range(len(data)):
 		examples.append(Detection(imgs[i], bounding_box_real[i], bounding_box_predict[i]))
 		
@@ -131,10 +132,32 @@ def test_iou():
 			cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 		#print("{}: {:.4f}".format(detection.image_path, iou))
 		# show the output image
-		cv2.imshow("Image", image)
-		cv2.imwrite("runs/"+str(cpt)+".jpg", image)
+		#cv2.imshow("Image", image)
+		#cv2.imwrite("runs/images/"+str(cpt)+".jpg", image)
 		#cv2.waitKey(0)
 
-	print(sum(iou_list)/len(iou_list))
+	#print(sum(iou_list)/len(iou_list)) iou average
+	return (iou_list)
 
-test_iou()
+def indicators(iou_list):
+	detected = 0
+	porcentage = []
+	for iou in iou_list:
+		
+		if iou!=0:
+			detected += 1
+			porcentage.append(iou)
+
+	fig = plt.figure()
+
+	pie = [detected/len(iou_list),1-detected/len(iou_list)]
+	plt.pie(pie, labels=['Detected','Not detected'], autopct = lambda pie: str(round(pie, 2)) + '%')
+	plt.savefig("runs/analysis/pie_detected.png")
+	plt.show()
+	plt.hist(porcentage)
+	plt.title('Repartition of detected iou')
+	#plt.plot([i for i in range(len(porcentage))],porcentage)
+	plt.show()
+
+iou_list= test_iou()
+indicators(iou_list)
