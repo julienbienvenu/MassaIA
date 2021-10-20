@@ -1,0 +1,8 @@
+# Distribution / packaging
+data/
+runs/
+Yolo/data/
+Yolo/__pycache__
+Yolo/utils/
+Yolo/wandb
+Yolo/yolov5x.pt

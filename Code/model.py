@@ -9,7 +9,6 @@ import scipy.misc
 import numpy as np
 from six import BytesIO
 from PIL import Image, ImageDraw, ImageFont
-from six.moves.urllib.request import urlopen
 
 import tensorflow as tf
 from get_data import extract_donnees
