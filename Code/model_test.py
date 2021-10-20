@@ -140,6 +140,7 @@ def test_iou():
 	return (iou_list)
 
 def indicators(iou_list):
+	print('Indicators calculation ...')
 	detected = 0
 	porcentage = []
 	for iou in iou_list:
@@ -149,15 +150,17 @@ def indicators(iou_list):
 			porcentage.append(iou)
 
 	fig = plt.figure()
-
 	pie = [detected/len(iou_list),1-detected/len(iou_list)]
 	plt.pie(pie, labels=['Detected','Not detected'], autopct = lambda pie: str(round(pie, 2)) + '%')
+	plt.title('Repartition of all iou')
 	plt.savefig("runs/analysis/pie_detected.png")
-	plt.show()
+	
+	fig = plt.figure()
 	plt.hist(porcentage)
 	plt.title('Repartition of detected iou')
+	plt.savefig("runs/analysis/detected_hist.png")
 	#plt.plot([i for i in range(len(porcentage))],porcentage)
-	plt.show()
+	
 
 iou_list= test_iou()
 indicators(iou_list)
