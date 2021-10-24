@@ -146,7 +146,7 @@ def test_iou():
 				cv2.imwrite("runs/images/false_detection/"+str(data[cpt])+".jpg", image)
 		#cv2.waitKey(0)
 		cpt=cpt+1
-	#print(sum(iou_list)/len(iou_list)) iou average
+	print(sum(iou_list)/len(iou_list)) #iou average
 	return (iou_list)
 
 def indicators(iou_list):
@@ -179,7 +179,9 @@ def indicators(iou_list):
 	plt.title('Repartition of detected iou')
 	plt.savefig("runs/analysis/detected_hist.png")	
 
+
 val = input('Do you want to try sample ? : (y/n)')
+
 if val=='y':
 	print('Enter try sample IoU')
 	name_folder = input('Name folder : ')

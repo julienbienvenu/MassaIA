@@ -1,7 +1,5 @@
 # Distribution / packaging
-data/
 runs/images/
-Yolo/data/
 Yolo/__pycache__
 Yolo/utils/
 Yolo/wandb
