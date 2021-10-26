@@ -44,12 +44,12 @@ with open(path_csv, newline='') as csvfile:
 bounding_box_predict = []
 path_csv = 'results_model.csv'
 reader = csv.DictReader(open(path_csv))
-	
+'''
 with open(path_csv, newline='') as csvfile:
 	reader = csv.DictReader(csvfile)
 	for row in reader:
 		bounding_box_predict.append([int(row['xmin']),int(row['ymin']),int(row['xmax']),int(row['ymax'])])
-
+'''
 def bb_intersection_over_union(boxA, boxB):
 
 	'''
@@ -90,18 +90,23 @@ def test_sample(name_folder):
 		#results.save()  # .save() or .show()
 		
 		try :
-			L.append([int(results.pandas().xyxy[0]['xmin']),
+			L.append([
+			int(results.pandas().xyxy[0]['xmin']),
 			int(results.pandas().xyxy[0]['ymin']),
 			int(results.pandas().xyxy[0]['xmax']),
-			int(results.pandas().xyxy[0]['ymax'])])
+			int(results.pandas().xyxy[0]['ymax']),
+			round(float(results.pandas().xyxy[0]['confidence']),2)])
 		except:
-			L.append([0,0,0,0])
+			L.append([1,1,512,512,0.01])
 
 	df = pd.DataFrame({
 	 "xmin": [L[i][0] for i in range(len(L))],
 	 "ymin": [L[i][1] for i in range(len(L))],
 	 "xmax" : [L[i][2] for i in range(len(L))],
-	 "ymax" : [L[i][3] for i in range(len(L))]})
+	 "ymax" : [L[i][3] for i in range(len(L))],
+	 "score" : [L[i][4] for i in range(len(L))]})
+
+	#df.set_index(imgs)
 	
 	df.to_csv('results_model.csv')
 
@@ -180,6 +185,7 @@ def indicators(iou_list):
 	plt.savefig("runs/analysis/detected_hist.png")	
 
 
+'''
 val = input('Do you want to try sample ? : (y/n)')
 
 if val=='y':
@@ -192,3 +198,5 @@ else:
 	print('Enter indicators IoU')
 	iou_list= test_iou()
 	indicators(iou_list)
+'''
+test_sample('exp')
