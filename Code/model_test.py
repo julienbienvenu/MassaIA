@@ -77,13 +77,14 @@ def test_sample(name_folder):
 	for i in range(len(imgs)):
 	
 		print(i, len(imgs))
-		path_model = 'Yolo/runs/train/'+str(name_folder)+'/weights/best.pt'
+		path_model = 'Yolo/best.pt'
 		path_to_yolo = 'Yolo/'
 		
 		model = torch.hub.load(path_to_yolo, 'custom', path=path_model, source='local')  # local repo
 
 		# Inference
 		results = model(imgs[i], size=512)  # includes NMS
+		panda = results.pandas().xyxy[0]
 
 		# Results
 		#results.print()  
@@ -91,22 +92,21 @@ def test_sample(name_folder):
 		
 		try :
 			L.append([
-			int(results.pandas().xyxy[0]['xmin']),
-			int(results.pandas().xyxy[0]['ymin']),
-			int(results.pandas().xyxy[0]['xmax']),
-			int(results.pandas().xyxy[0]['ymax']),
+			data[i]+'.png',
+			int(panda['xmin']),
+			int(panda['ymin']),
+			int(panda['xmax']),
+			int(panda['ymax']),
 			round(float(results.pandas().xyxy[0]['confidence']),2)])
 		except:
 			L.append([1,1,512,512,0.01])
 
-	df = pd.DataFrame({
-	 "xmin": [L[i][0] for i in range(len(L))],
-	 "ymin": [L[i][1] for i in range(len(L))],
-	 "xmax" : [L[i][2] for i in range(len(L))],
-	 "ymax" : [L[i][3] for i in range(len(L))],
-	 "score" : [L[i][4] for i in range(len(L))]})
-
-	#df.set_index(imgs)
+	df = pd.DataFrame({"filename" : [L[i][0] for i in range(len(L))],
+	 "xmin": [L[i][1] for i in range(len(L))],
+	 "ymin": [L[i][2] for i in range(len(L))],
+	 "xmax" : [L[i][3] for i in range(len(L))],
+	 "ymax" : [L[i][4] for i in range(len(L))],
+	 "score" : [L[i][5] for i in range(len(L))]})
 	
 	df.to_csv('results_model.csv')
 
@@ -192,8 +192,6 @@ if val=='y':
 	print('Enter try sample IoU')
 	name_folder = input('Name folder : ')
 	test_sample(name_folder)
-	iou_list= test_iou()
-	indicators(iou_list)
 else:
 	print('Enter indicators IoU')
 	iou_list= test_iou()

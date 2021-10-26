@@ -1,11 +1,21 @@
 Execution du programme :
 se placer dans le dossier Yolo 
-python3 train.py --img 512 --batch 16 --epochs 3 --data data/coco128.yaml --weights yolov5x.pt
+pip install -r requirements.txt
+python3 train.py --img 512 --batch 6 --epochs 250 --data data/coco128.yaml --weights best.pt
+python3 val.py --data data/coco128.yaml --weights best.pt --img 512 --save-json --save-txt
+
+
+
+
+
+
+
+
+##############################################################################################
 
 Voir pour API depuis le site
 Choisir un meilleur modèle
 Augmentation de la base de données
-
 
 https://github.com/ultralytics/yolov5#pretrained-checkpoints
 https://github.com/ultralytics/yolov5/issues/36
