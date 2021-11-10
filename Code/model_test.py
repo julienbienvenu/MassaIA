@@ -77,7 +77,7 @@ def test_sample(name_folder):
 	for i in range(len(imgs)):
 	
 		print(i, len(imgs))
-		path_model = 'Yolo/best.pt'
+		path_model = 'Yolo/runs/train/exp3/weights/best.pt'
 		path_to_yolo = 'Yolo/'
 		
 		model = torch.hub.load(path_to_yolo, 'custom', path=path_model, source='local')  # local repo

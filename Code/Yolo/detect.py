@@ -15,6 +15,7 @@ import cv2
 import numpy as np
 import torch
 import torch.backends.cudnn as cudnn
+import csv
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # YOLOv5 root directory
@@ -66,6 +67,7 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
     # Directories
     save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
     (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
+    list_result = [['filename','xmin','ymin','xmax','ymax','score']]
 
     # Initialize
     set_logging()
@@ -235,6 +237,14 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                 cv2.imshow(str(p), im0)
                 cv2.waitKey(1)  # 1 millisecond
 
+            coordonate = []
+            for val in xyxy:
+                coordonate.append(val.item())
+            
+            print('Confidence for antenna : ',round(float(conf.item()),2))
+            print('Bounding box :', coordonate)
+            list_result.append([p.name,int(coordonate[0]),int(coordonate[1]),int(coordonate[2]),int(coordonate[3]),round(float(conf.item()),2)])            
+
             # Save results (image with detections)
             if save_img:
                 if dataset.mode == 'image':
@@ -253,6 +263,42 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                             save_path += '.mp4'
                         vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
                     vid_writer[i].write(im0)
+
+    #Save to csv
+    print('Saving result to csv')
+    out = [['filename','xmin','ymin','xmax','ymax','score']]
+    print('Longueur detect :',len(list_result))
+
+    list_append = [list_result[0][0],list_result[0][1],list_result[0][2],list_result[3][2],list_result[0][4],list_result[0][5]]
+    name = list_result[0][0]
+    score = list_result[0][5]
+
+    for val in list_result:
+        if val[0]==name:
+            if val[5]>score:
+                list_append = [val[0],val[1],val[2],val[3],val[4],val[5]]
+                score = val[5]
+    else:        
+        out.append(list_append)
+        list_append = [val[0],val[1],val[2],val[3],val[4],val[5]]
+        name = val[0]
+        score = val[5]
+
+    print('Longueur csv :',len(out))
+
+    print(list_result)
+
+    file = open('result.csv','w')
+    with file:    
+        write = csv.writer(file)
+        write.writerows(out)
+    file.close()
+
+    file = open('result2.csv','w')
+    with file:    
+        write = csv.writer(file)
+        write.writerows(list_result)
+    file.close()
 
     # Print results
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
